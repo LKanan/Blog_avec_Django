@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'realisations/css/bootstrap.css' %}">
+    <title>Mes réalisations</title>
+</head>
+<body>
+<nav class="navbar bg-body-tertiary sticky-top">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Mes réalisations</span>
+    </div>
+</nav>
+
+
+<div class="mt-5 offset-3" style="width: 40rem;" >
+    {% for realisation in realisations %}
+        <div class="row mb-5">
+            <div class="card h-100">
+                {% if realisation.id < 4 %}
+                    {#            Pour afficher des images qui se trouvent sur la machine en local on est obligé d'utiliser dans #}
+                    {#            src="{% static chemin_vers_fichier %}"#}
+                    <img src="{% static realisation.image_url %} " class="card-img-top pt-2" alt="image">
+                {% else %}
+                    {#            Pour afficher des images  qui se trouvent sur internet via des liens vers les images #}
+                    {#            on est obligé d'utiliser dans src="{{ chemin_vers_fichier }}"#}
+                    <img src="{{ realisation.image_url }}" class="card-img-top pt-2" alt="image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ realisation.titre }}</h5>
+                    <p class="card-text">{{ realisation.description }}</p>
+                    <a href="#" class="btn btn-primary card-img-bottom">Voir plus</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+<script src="{% static 'realisations/js/jquery.js' %}"></script>
+<script src="{% static 'realisations/js/bootstrap.js' %}"></script>
+<script src="{% static 'realisations/js/pooper.js' %}"></script>
+</body>
+</html>
